@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>A White Page</title>
+    <style>
+        .square {
+          float:left;
+        }
+        .rowholder{
+            width: 500px;
+        }
+        .container {
+            display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 80vh;
+        }
+        body{
+            background-color: #ffffff;
+        }
+        .centeredContainer{
+            
+            border-width: 1px;
+            border-style:solid;
+            border-color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="masterHolder">
+
+    </div>
+    
+</body>
+</html>
+
+<script>
+    function addRows(container,size,squareSize){
+        var centeredContainer = document.createElement('div');
+        centeredContainer.className = "centeredContainer";
+        container.appendChild(centeredContainer);
+        for(var i = 0; i <size/squareSize;i++){
+            var row = document.createElement('div');
+            row.className = "rowholder";
+            row.style.width = size;
+            addSquares(row,size/squareSize,squareSize);
+            centeredContainer.appendChild(row);
+        }
+    }
+
+    function addSquares(container,count,squareSize){
+        var squareCount = count;
+        for(i = 0; i < squareCount;i++){
+            container.appendChild(createSquare(squareSize));
+        }
+    }
+
+    function createSquare(squareSize){
+        var newSquare = document.createElement('div');
+        newSquare.className = "square";
+        newSquare.style.backgroundColor = randomWhite();
+        newSquare.style.height = squareSize + "px";
+        newSquare.style.width = squareSize + "px";
+        return newSquare;
+    }
+    
+    function randomWhite(){
+        var variance = 5;
+        var r = 255 - Math.floor(Math.random() * variance);
+        var g = 255 - Math.floor(Math.random() * variance);
+        var b  = 255 - Math.floor(Math.random() * variance);
+        
+
+
+        return "#"+(r).toString(16)+(g).toString(16)+(b).toString(16);
+    }
+
+    addRows(document.getElementById('masterHolder'),500,5);
+</script>
